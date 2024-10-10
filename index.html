@@ -1,0 +1,97 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom Video Player</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            padding: 20px;
+            text-align: center;
+        }
+
+        video {
+            width: 100%;
+            max-width: 700px;
+            border: 2px solid #ddd;
+            background-color: black;
+        }
+
+        .controls {
+            margin-top: 10px;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        button, select {
+            padding: 5px 10px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Custom Video Player</h1>
+
+    <!-- Video Player -->
+    <video id="videoPlayer" controls>
+        <!-- Placeholder for video URLs -->
+        <source id="videoSource" src="" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+
+    <!-- Video Controls -->
+    <div class="controls">
+        <!-- Resolution Selection -->
+        <label for="resolution">Resolution:</label>
+        <select id="resolution" onchange="changeResolution()">
+            <option value="low">Low</option>
+            <option value="medium">Medium</option>
+            <option value="high">High</option>
+        </select>
+
+        <!-- Playback Speed -->
+        <label for="speed">Speed:</label>
+        <select id="speed" onchange="changeSpeed()">
+            <option value="0.5">0.5x</option>
+            <option value="1">1x (Normal)</option>
+            <option value="1.5">1.5x</option>
+            <option value="2">2x</option>
+        </select>
+
+        <!-- Skip Controls -->
+        <button onclick="skip(-10)">⏪ 10s Back</button>
+        <button onclick="skip(10)">⏩ 10s Forward</button>
+    </div>
+
+    <script>
+        const video = document.getElementById('videoPlayer');
+
+        function changeResolution() {
+            const resolution = document.getElementById('resolution').value;
+            // You can customize the URLs here for each resolution
+            if (resolution === 'low') {
+                video.src = 'your-low-resolution-video.mp4';
+            } else if (resolution === 'medium') {
+                video.src = 'your-medium-resolution-video.mp4';
+            } else if (resolution === 'high') {
+                video.src = 'your-high-resolution-video.mp4';
+            }
+            video.play();
+        }
+
+        function changeSpeed() {
+            const speed = document.getElementById('speed').value;
+            video.playbackRate = speed;
+        }
+
+        function skip(time) {
+            video.currentTime += time;
+        }
+    </script>
+</body>
+</html>
